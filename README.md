@@ -69,7 +69,7 @@ Finally, navigate to `http://localhost:5000/` and you should see the API running
 
 ## Project Structure
 
-The most obvious difference in a TypeScript + Node project is the folder structure. In a TypeScript project, it's best to have separate _source_ and _distributable_ files. TypeScript (`.ts`) files live in your `src` folder and after compilation are output as JavaScript (`.js`) in the `dist` folder.
+The most obvious difference in a TypeScript + Node project is the folder structure. In a TypeScript project, it's best to have separate _source_ and _distributable_ files. TypeScript (`.ts`) files live in your `src` folder and after compilation are output as JavaScript (`.js`) in the same folder.
 
 The full folder structure of this app is explained below:
 
@@ -78,10 +78,9 @@ The full folder structure of this app is explained below:
 | Name               | Description                                                                                                                                                   |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **config**         | Contains config environment to be used by the config package, such as MongoDB URI, jwtSecret, and etc.                                                        |
-| **dist**           | Contains the distributable (or output) from your TypeScript build                                                                                             |
 | **node_modules**   | Contains all your npm dependencies                                                                                                                            |
 | **REST**           | Contains all API requests to test the routes, used with [REST Client VSCode extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) |
-| **src**            | Contains your source code that will be compiled to the dist dir                                                                                               |
+| **src**            | Contains your source code that will be compiled                                                                                                     |
 | **src/middleware** | Contains the middlewares to intercept requests                                                                                                                |
 | **src/models**     | Models define Mongoose schemas that will be used in storing and retrieving data from MongoDB                                                                  |
 | **src/routes**     | Routes define the endpoints of your API                                                                                                                       |
@@ -104,7 +103,6 @@ Let's dissect this project's `tsconfig.json`, starting with the `compilerOptions
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
@@ -120,7 +118,6 @@ Let's dissect this project's `tsconfig.json`, starting with the `compilerOptions
 | `"noImplicitAny": true`      | Enables a stricter setting which throws errors when something has a default `any` value                                                                    |
 | `"moduleResolution": "node"` | TypeScript attempts to mimic Node's module resolution strategy. Read more [here](https://www.typescriptlang.org/docs/handbook/module-resolution.html#node) |
 | `"sourceMap": true`          | We want source maps to be output along side our JavaScript. See the [debugging](#debugging) section                                                        |
-| `"outDir": "dist"`           | Location to output `.js` files after compilation                                                                                                           |
 | `"baseUrl": "."`             | Part of configuring module resolution. See [path mapping section](#installing-dts-files-from-definitelytyped)                                              |
 | `paths: {...}`               | Part of configuring module resolution. See [path mapping section](#installing-dts-files-from-definitelytyped)                                              |
 
@@ -150,10 +147,10 @@ Below is a list of all the scripts this template has available:
 | -------------- | --------------------------------------------------------------------------------------------- |
 | `tsc`          | Transpiles TypeScript codes to JavaScript.                                                    |
 | `watch-tsc`    | Transpiles TypeScript codes to JavaScript, with auto reload.                                  |
-| `deploy`       | Runs node on `dist/server.js` which is the app's entry point.                                 |
-| `watch-deploy` | Runs node on `dist/server.js` which is the app's entry point, with auto reload.               |
-| `server`       | Transpiles TypeScript codes to JavaScript then run node on `dist/server.js` with auto reload. |
-| `start`        | Transpiles TypeScript codes to JavaScript then run node on `dist/server.js`.                  |
+| `deploy`       | Runs node on `src/server.js` which is the app's entry point.                                 |
+| `watch-deploy` | Runs node on `src/server.js` which is the app's entry point, with auto reload.               |
+| `server`       | Transpiles TypeScript codes to JavaScript then run node on `src/server.js` with auto reload. |
+| `start`        | Transpiles TypeScript codes to JavaScript then run node on `src/server.js`.                  |
 
 Since we're developing with TypeScript, it is important for the codes to be transpiled first to JavaScript before running the node server. It is best to deploy the app using: `npm run server` or `npm run start` command.
 
