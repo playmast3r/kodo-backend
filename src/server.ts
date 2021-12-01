@@ -1,10 +1,8 @@
 import bodyParser from "body-parser";
 import express from "express";
-
 import connectDB from "../config/database";
-import auth from "./routes/api/auth";
-import user from "./routes/api/user";
-import profile from "./routes/api/profile";
+
+import post from "./routes/api/post";
 
 const app = express();
 
@@ -12,7 +10,7 @@ const app = express();
 connectDB();
 
 // Express configuration
-app.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 5020);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,9 +21,7 @@ app.get("/", (_req, res) => {
   res.send("API Running");
 });
 
-app.use("/api/auth", auth);
-app.use("/api/user", user);
-app.use("/api/profile", profile);
+app.use("/api/post", post);
 
 const port = app.get("port");
 const server = app.listen(port, () =>

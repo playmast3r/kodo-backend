@@ -1,3 +1,6 @@
 node_modules
 dist
+**.js
+**.js.map
+nodemon.json
 package-lock.json
