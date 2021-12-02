@@ -10,7 +10,7 @@ const app = express();
 connectDB();
 
 // Express configuration
-app.set("port", process.env.PORT || 5020);
+app.set("port", process.env.PORT || 3002);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
