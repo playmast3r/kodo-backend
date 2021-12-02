@@ -17,7 +17,7 @@ router.get("/", async (req: Request, res: Response) => {
   try {
     console.log(req?.query);
     const posts = await post.getPosts(req?.query);
-
+    res.header("Access-Control-Allow-Origin", "*");
     res.json(posts);
   } catch (err) {
     console.error(err.message);
